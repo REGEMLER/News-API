@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const baseConfig = {
     entry: path.resolve(__dirname, './src/index.js'),
+    devtool: 'inline-source-map',
     mode: 'development',
     module: {
         rules: [
@@ -12,10 +13,14 @@ const baseConfig = {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
             },
+            {
+                use: ['ts-loader'],
+                test: /\.tsx?$/,
+            },
         ],
     },
     resolve: {
-        extensions: ['.js'],
+        extensions: ['.js', '.ts'],
     },
     output: {
         filename: 'index.js',
