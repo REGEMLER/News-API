@@ -1,25 +1,7 @@
 import News from './news/news';
 import Sources from './sources/sources';
+import { article, source } from '../types/types';
 
-type article = {
-    author: string;
-    content: string;
-    description: string;
-    publishedAt: string;
-    title: string;
-    urlToImage: string;
-    url: string;
-    source: { id: string; name: string };
-};
-type source = {
-    id: string;
-    category: string;
-    country: string;
-    description: string;
-    language: string;
-    name: string;
-    url: string;
-};
 type data = { status: string; totalResults?: number; articles?: article[]; sources?: source[] };
 
 interface IAppView {
@@ -30,8 +12,8 @@ interface IAppView {
 }
 
 export class AppView implements IAppView {
-    news: News;
-    sources: Sources;
+    readonly news: News;
+    readonly sources: Sources;
     constructor() {
         this.news = new News();
         this.sources = new Sources();

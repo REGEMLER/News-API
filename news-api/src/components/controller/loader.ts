@@ -1,40 +1,22 @@
+import { article, source, option, respParams } from '../types/types';
+
 type op = (data?: cbData) => void;
-type Options = { sources?: string; apiKey?: string };
-type respParams = { endpoint: string; options?: Options };
-type source = {
-    id: string;
-    category: string;
-    country: string;
-    description: string;
-    language: string;
-    name: string;
-    url: string;
-};
-type article = {
-    author: string;
-    content: string;
-    description: string;
-    publishedAt: string;
-    title: string;
-    urlToImage: string;
-    url: string;
-    source: { id: string; name: string };
-};
+
 type cbData = { status: string; totalResults?: number; sources?: source[]; articles?: article[] };
 
 export interface ILoader {
     baseLink: string;
-    options: Options;
+    options: option;
     getResp(params: respParams, callback: op): void;
     errorHandler(res: Response): Response | void;
-    makeUrl(options: Options, endpoint: string): string;
-    load(method: string, endpoint: string, callback: (data: cbData) => void, options: Options): void;
+    makeUrl(options: option, endpoint: string): string;
+    load(method: string, endpoint: string, callback: (data: cbData) => void, options: option): void;
 }
 
 class Loader implements ILoader {
     constructor(
-        public baseLink: string,
-        public options: Options
+        readonly baseLink: string,
+        readonly options: option
     ) {}
 
     getResp(
@@ -56,8 +38,8 @@ class Loader implements ILoader {
         return res;
     }
 
-    makeUrl(options: Options, endpoint: string): string {
-        const urlOptions: Options = { ...this.options, ...options };
+    makeUrl(options: option, endpoint: string): string {
+        const urlOptions: option = { ...this.options, ...options };
         let url: string = `${this.baseLink}${endpoint}?`;
 
         const urlStrings: [string, string][] = Object.entries(urlOptions);

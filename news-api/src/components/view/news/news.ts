@@ -1,14 +1,5 @@
 import './news.css';
-type article = {
-    author: string;
-    content: string;
-    description: string;
-    publishedAt: string;
-    title: string;
-    urlToImage: string;
-    url: string;
-    source: { id: string; name: string };
-};
+import { article } from '../../types/types';
 
 interface INews {
     draw(data: article[]): void;

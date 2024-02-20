@@ -1,13 +1,5 @@
 import './sources.css';
-type source = {
-    id: string;
-    category: string;
-    country: string;
-    description: string;
-    language: string;
-    name: string;
-    url: string;
-};
+import { source } from '../../types/types';
 
 interface ISources {
     draw(data: source[]): void;

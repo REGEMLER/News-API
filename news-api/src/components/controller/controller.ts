@@ -1,37 +1,23 @@
 import AppLoader from './appLoader';
-type op = (data?: cbData) => void;
-type source = {
-    id: string;
-    category: string;
-    country: string;
-    description: string;
-    language: string;
-    name: string;
-    url: string;
-};
-type article = {
-    author: string;
-    content: string;
-    description: string;
-    publishedAt: string;
-    title: string;
-    urlToImage: string;
-    url: string;
-    source: { id: string; name: string };
-};
+import { article, source } from '../types/types';
+enum endpoints {
+    SOURSES = 'sources',
+    EVERYTHING = 'everything',
+}
+
 type cbData = { status: string; totalResults?: number; sources?: source[]; articles?: article[] };
 
 class AppController extends AppLoader {
-    getSources(callback: op) {
+    getSources(callback: (data?: cbData) => void) {
         super.getResp(
             {
-                endpoint: 'sources',
+                endpoint: endpoints.SOURSES,
             },
             callback
         );
     }
 
-    getNews(e: MouseEvent, callback: op) {
+    getNews(e: MouseEvent, callback: (data?: cbData) => void) {
         let target = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLElement;
 
@@ -42,7 +28,7 @@ class AppController extends AppLoader {
                     newsContainer.setAttribute('data-source', sourceId);
                     super.getResp(
                         {
-                            endpoint: 'everything',
+                            endpoint: endpoints.EVERYTHING,
                             options: {
                                 sources: sourceId,
                             },
