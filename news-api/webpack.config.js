@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const DotenvWebpackPlugin = require('dotenv-webpack');
 
 const baseConfig = {
-    entry: path.resolve(__dirname, './src/index.js'),
+    entry: path.resolve(__dirname, './src/index.ts'),
     devtool: 'inline-source-map',
     mode: 'development',
     module: {
@@ -28,6 +28,7 @@ const baseConfig = {
         path: path.resolve(__dirname, '../dist'),
     },
     plugins: [
+        new DotenvWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
             filename: 'index.html',
@@ -39,6 +40,5 @@ const baseConfig = {
 module.exports = ({ mode }) => {
     const isProductionMode = mode === 'prod';
     const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
-
     return merge(baseConfig, envConfig);
 };

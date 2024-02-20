@@ -3,7 +3,6 @@ class Loader {
         this.baseLink = baseLink;
         this.options = options;
     }
-
     getResp(
         { endpoint, options = {} },
         callback = () => {
