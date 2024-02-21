@@ -23,7 +23,7 @@ export interface fullData {
     status: string;
     articles: article[];
     sources: source[];
-    totalResults?: number;
+    totalResults: number;
 }
 export type articleData = Pick<fullData, 'status' | 'articles' | 'totalResults'>;
 export type sourceData = Pick<fullData, 'status' | 'sources' | 'totalResults'>;

@@ -23,12 +23,12 @@ export class AppView implements IAppView {
         return this._sources;
     }
 
-    drawNews(data?: articleData) {
+    drawNews(data: articleData | undefined | null) {
         const values = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
 
-    drawSources(data?: sourceData) {
+    drawSources(data: sourceData | undefined | null) {
         const values = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }
