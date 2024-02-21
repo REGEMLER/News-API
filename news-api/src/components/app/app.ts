@@ -8,15 +8,21 @@ interface IApp {
 }
 
 class App implements IApp {
-    public controller: AppController;
-    public view: AppView;
+    private readonly _controller: AppController;
+    private readonly _view: AppView;
     constructor() {
-        this.controller = new AppController();
-        this.view = new AppView();
+        this._controller = new AppController();
+        this._view = new AppView();
+    }
+    get controller() {
+        return this._controller;
+    }
+    get view() {
+        return this._view;
     }
 
     start() {
-        const sourcesElement = document.querySelector('.sources') as HTMLElement;
+        const sourcesElement: HTMLElement = document.querySelector('.sources') as HTMLElement;
         sourcesElement.addEventListener('click', (e) => this.controller.getNews(e, (data) => this.view.drawNews(data)));
         this.controller.getSources((data) => this.view.drawSources(data));
     }

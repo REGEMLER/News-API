@@ -1,16 +1,14 @@
-import { article, source, option, respParams } from '../types/types';
+import { option, respParams, fullData } from '../types/types';
 
-type op = (data?: cbData) => void;
-
-type cbData = { status: string; totalResults?: number; sources?: source[]; articles?: article[] };
+type cb = (data: fullData) => void;
 
 export interface ILoader {
     baseLink: string;
     options: option;
-    getResp(params: respParams, callback: op): void;
-    errorHandler(res: Response): Response | void;
+    getResp(params: respParams, callback: cb): void;
+    errorHandler(res: Response): Response;
     makeUrl(options: option, endpoint: string): string;
-    load(method: string, endpoint: string, callback: (data: cbData) => void, options: option): void;
+    load(method: string, endpoint: string, callback: cb, options: option): void;
 }
 
 class Loader implements ILoader {
@@ -21,7 +19,7 @@ class Loader implements ILoader {
 
     getResp<T>(
         params: respParams,
-        callback: (data?: T) => void = () => {
+        callback: (data: T) => void = () => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -45,8 +43,8 @@ class Loader implements ILoader {
         const urlStrings: [string, string][] = Object.entries(urlOptions);
 
         urlStrings.forEach((item: [string, string]) => {
-            const key = item[0];
-            const value = item[1];
+            const key: string = item[0];
+            const value: string = item[1];
             url += `${key}=${value}&`;
         });
 

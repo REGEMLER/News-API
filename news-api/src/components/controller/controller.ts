@@ -6,7 +6,7 @@ enum endpoints {
 }
 
 class AppController extends AppLoader {
-    getSources(callback: (data?: sourceData) => void) {
+    getSources(callback: (data: sourceData) => void) {
         super.getResp<sourceData>(
             {
                 endpoint: endpoints.SOURSES,
@@ -15,13 +15,13 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: MouseEvent, callback: (data?: articleData) => void) {
-        let target = e.target as HTMLElement;
-        const newsContainer = e.currentTarget as HTMLElement;
+    getNews(e: MouseEvent, callback: (data: articleData) => void) {
+        let target: HTMLElement = e.target as HTMLElement;
+        const newsContainer: HTMLElement = e.currentTarget as HTMLElement;
 
         while (target !== newsContainer && target) {
             if (target.classList.contains('source__item')) {
-                const sourceId = target.getAttribute('data-source-id') as string;
+                const sourceId: string = target.getAttribute('data-source-id') as string;
                 if (newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
                     super.getResp<articleData>(

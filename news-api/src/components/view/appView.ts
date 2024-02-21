@@ -10,11 +10,17 @@ interface IAppView {
 }
 
 export class AppView implements IAppView {
-    readonly news: News;
-    readonly sources: Sources;
+    private readonly _news: News;
+    private readonly _sources: Sources;
     constructor() {
-        this.news = new News();
-        this.sources = new Sources();
+        this._news = new News();
+        this._sources = new Sources();
+    }
+    get news() {
+        return this._news;
+    }
+    get sources() {
+        return this._sources;
     }
 
     drawNews(data?: articleData) {

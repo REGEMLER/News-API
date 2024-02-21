@@ -19,7 +19,7 @@ export type article = {
 };
 export type option = { sources?: string; apiKey?: string };
 export type respParams = { endpoint: string; options?: option };
-interface fullData {
+export interface fullData {
     status: string;
     articles: article[];
     sources: source[];
