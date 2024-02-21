@@ -1,6 +1,6 @@
 import { option, respParams, fullData } from '../types/types';
 
-type cb = (data: fullData) => void;
+type cb = (data: Partial<fullData>) => void;
 
 export interface ILoader {
     baseLink: string;
