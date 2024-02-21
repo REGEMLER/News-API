@@ -19,3 +19,11 @@ export type article = {
 };
 export type option = { sources?: string; apiKey?: string };
 export type respParams = { endpoint: string; options?: option };
+interface fullData {
+    status: string;
+    articles: article[];
+    sources: source[];
+    totalResults?: number;
+}
+export type articleData = Pick<fullData, 'status' | 'articles' | 'totalResults'>;
+export type sourceData = Pick<fullData, 'status' | 'sources' | 'totalResults'>;

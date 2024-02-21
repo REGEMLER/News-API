@@ -19,13 +19,13 @@ class Loader implements ILoader {
         readonly options: option
     ) {}
 
-    getResp(
+    getResp<T>(
         params: respParams,
-        callback: op = () => {
+        callback: (data?: T) => void = () => {
             console.error('No callback for GET response');
         }
     ): void {
-        this.load('GET', params.endpoint, callback, params.options);
+        this.load<T>('GET', params.endpoint, callback, params.options);
     }
 
     errorHandler(res: Response) {
@@ -53,7 +53,7 @@ class Loader implements ILoader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: (data: cbData) => void, options = {}) {
+    load<T>(method: string, endpoint: string, callback: (data: T) => void, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

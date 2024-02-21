@@ -1,15 +1,13 @@
 import AppLoader from './appLoader';
-import { article, source } from '../types/types';
+import { articleData, sourceData } from '../types/types';
 enum endpoints {
     SOURSES = 'sources',
     EVERYTHING = 'everything',
 }
 
-type cbData = { status: string; totalResults?: number; sources?: source[]; articles?: article[] };
-
 class AppController extends AppLoader {
-    getSources(callback: (data?: cbData) => void) {
-        super.getResp(
+    getSources(callback: (data?: sourceData) => void) {
+        super.getResp<sourceData>(
             {
                 endpoint: endpoints.SOURSES,
             },
@@ -17,7 +15,7 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: MouseEvent, callback: (data?: cbData) => void) {
+    getNews(e: MouseEvent, callback: (data?: articleData) => void) {
         let target = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLElement;
 
@@ -26,7 +24,7 @@ class AppController extends AppLoader {
                 const sourceId = target.getAttribute('data-source-id') as string;
                 if (newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
+                    super.getResp<articleData>(
                         {
                             endpoint: endpoints.EVERYTHING,
                             options: {
