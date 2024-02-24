@@ -2,9 +2,13 @@ import Loader from './loader';
 
 class AppLoader extends Loader {
     constructor() {
-        super(process.env.API_URL as string, {
-            apiKey: process.env.API_KEY,
-        });
+        if (typeof process.env.API_URL === 'string') {
+            super(process.env.API_URL, {
+                apiKey: process.env.API_KEY,
+            });
+        } else {
+            throw new Error('Get your own API KEY!');
+        }
     }
 }
 

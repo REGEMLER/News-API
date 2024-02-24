@@ -22,9 +22,15 @@ class App implements IApp {
     }
 
     start() {
-        const sourcesElement: HTMLElement = document.querySelector('.sources') as HTMLElement;
-        sourcesElement.addEventListener('click', (e) => this.controller.getNews(e, (data) => this.view.drawNews(data)));
-        this.controller.getSources((data) => this.view.drawSources(data));
+        const sourcesElement: HTMLElement | null = document.querySelector('.sources');
+        if (sourcesElement) {
+            sourcesElement.addEventListener('click', (e) =>
+                this.controller.getNews(e, (data) => this.view.drawNews(data))
+            );
+            this.controller.getSources((data) => this.view.drawSources(data));
+        } else {
+            throw new Error('Something went wrong! Try again!');
+        }
     }
 }
 

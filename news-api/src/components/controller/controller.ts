@@ -16,27 +16,31 @@ class AppController extends AppLoader {
     }
 
     getNews(e: MouseEvent, callback: (data: articleData) => void) {
-        let target: HTMLElement = e.target as HTMLElement;
-        const newsContainer: HTMLElement = e.currentTarget as HTMLElement;
+        if (e.target instanceof HTMLElement && e.currentTarget instanceof HTMLElement) {
+            let target: HTMLElement | null = e.target;
+            const newsContainer: HTMLElement | null = e.currentTarget;
 
-        while (target !== newsContainer && target) {
-            if (target.classList.contains('source__item')) {
-                const sourceId: string = target.getAttribute('data-source-id') as string;
-                if (newsContainer.getAttribute('data-source') !== sourceId) {
-                    newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp<articleData>(
-                        {
-                            endpoint: endpoints.EVERYTHING,
-                            options: {
-                                sources: sourceId,
-                            },
-                        },
-                        callback
-                    );
+            while (target !== newsContainer && target) {
+                if (target.classList.contains('source__item')) {
+                    const sourceId: string | null = target.getAttribute('data-source-id');
+                    if (typeof sourceId === 'string') {
+                        if (newsContainer.getAttribute('data-source') !== sourceId) {
+                            newsContainer.setAttribute('data-source', sourceId);
+                            super.getResp<articleData>(
+                                {
+                                    endpoint: endpoints.EVERYTHING,
+                                    options: {
+                                        sources: sourceId,
+                                    },
+                                },
+                                callback
+                            );
+                        }
+                        return;
+                    }
                 }
-                return;
+                target = target.parentElement;
             }
-            target = target.parentNode as HTMLElement;
         }
     }
 }

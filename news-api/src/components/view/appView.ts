@@ -31,6 +31,9 @@ export class AppView implements IAppView {
     drawSources(data: sourceData | undefined | null) {
         const values = data?.sources ? data?.sources : [];
         this.sources.draw(values);
+        const countrys: string[] = [];
+        values.forEach((item) => countrys.push(item.language));
+        console.log([...new Set(countrys)]);
     }
 }
 
