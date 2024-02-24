@@ -1,0 +1,19 @@
+.selects {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 1rem auto;
+    gap: 10px;
+}
+select {
+    min-width: 200px;
+    min-height: 40px;
+    font: 300 1em 'Fira Sans', sans-serif;
+    border: 2px solid #30c5ff;
+    color: #30c5ff;
+    background-color: transparent;
+}
+option {
+    background-color: transparent;
+}

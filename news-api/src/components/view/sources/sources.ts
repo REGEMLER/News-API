@@ -22,7 +22,10 @@ class Sources implements ISources {
             });
         }
         const sourcesElement: HTMLElement | null = document.querySelector('.sources');
-        if (sourcesElement) sourcesElement.append(fragment);
+        if (sourcesElement) {
+            sourcesElement.innerHTML = '';
+            sourcesElement.append(fragment);
+        }
     }
 }
 
