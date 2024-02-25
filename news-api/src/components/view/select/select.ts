@@ -24,7 +24,7 @@ class SelectLang implements ISelectLang {
                 }
             });
             const h2: HTMLHeadingElement = document.createElement('h2');
-            h2.textContent = 'Select news language';
+            h2.textContent = 'Select language';
             fragment.append(h2);
             fragment.append(selectClone);
         }

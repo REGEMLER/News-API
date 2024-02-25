@@ -35,7 +35,6 @@ class App implements IApp {
             selectsElement.addEventListener('change', (e) => {
                 if (e.target instanceof HTMLSelectElement) {
                     const selectedLang = e.target.value;
-                    console.log(selectedLang);
                     if (selectedLang && typeof selectedLang === 'string') {
                         this.controller.getSources((data) => {
                             if (selectedLang === 'all') {
