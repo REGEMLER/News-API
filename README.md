@@ -7,5 +7,3 @@
 - Modules in JavaScript
 - Webpack
 - TypeScript
-
-## Deploy **[Link](https://regemler.github.io/News-API/)**
